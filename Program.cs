@@ -4,6 +4,7 @@ using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace itobot {
     class Program {
@@ -111,7 +112,8 @@ namespace itobot {
                                     sb.AppendLine("参加リスト");
                                     foreach (ulong uid in players) {
                                         string name = client.GetGuild(Config.ID.ServerID).GetUser(uid).DisplayName;
-                                        sb.AppendLine(name.Substring(1, Math.Min(name.Length, 20)));
+                                        if (name.Length > 20) sb.AppendLine(string.Concat(name.AsSpan(1, 20), "..."));
+                                        else sb.AppendLine(name);
                                     }
                                     await cmd.RespondAsync(sb.ToString());
                                     break;
@@ -142,7 +144,8 @@ namespace itobot {
                             sb.AppendLine("現在の並び");
                             foreach (ulong uid in sub) {
                                 string name = client.GetGuild(Config.ID.ServerID).GetUser(uid).DisplayName;
-                                sb.AppendLine(name.Substring(1, Math.Min(name.Length, 20)));
+                                if (name.Length > 20) sb.AppendLine(string.Concat(name.AsSpan(1, 20), "..."));
+                                else sb.AppendLine(name);
                             }
                             await cmd.RespondAsync(sb.ToString());
                             break;
@@ -174,7 +177,8 @@ namespace itobot {
                                     sb.AppendLine("参加リスト");
                                     foreach (ulong uid in players) {
                                         string name = client.GetGuild(Config.ID.ServerID).GetUser(uid).DisplayName;
-                                        sb.AppendLine(name.Substring(1, Math.Min(name.Length, 20)));
+                                        if (name.Length > 20) sb.AppendLine(string.Concat(name.AsSpan(1, 20), "..."));
+                                        else sb.AppendLine(name);
                                     }
                                     await cmd.RespondAsync(sb.ToString());
                                     break;
