@@ -136,7 +136,7 @@ namespace itobot {
                                 if (name.Length > 10) sb.AppendLine(string.Concat(name.AsSpan(0, 10), "..."));
                                 else sb.AppendLine(name);
                             }
-                            sb.AppendLine($"正解数{res.Count(c => c.Item1)}");
+                            sb.AppendLine($"不正解数{players.Count - res.Count(c => c.Item1)}");
                             await cmd.RespondAsync(sb.ToString());
                             break;
                         case "check":
