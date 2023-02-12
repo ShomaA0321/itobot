@@ -104,7 +104,9 @@ namespace itobot {
                                     if (players.Contains(arg3.Id)) {
                                         players.Remove(arg3.Id);
                                         ito.Leave(arg3.Id);
-                                        await cmd.RespondAsync($"退室 : {arg3.DisplayName}");
+                                        string name = client.GetGuild(Config.ID.ServerID).GetUser(arg3.Id).DisplayName;
+                                        if (name.Length > 10) name = string.Concat(name.AsSpan(0, 10), "...");
+                                        await cmd.RespondAsync($"退室 : {name}");
                                     }
                                     break;
                                 case "list":
@@ -112,7 +114,7 @@ namespace itobot {
                                     sb.AppendLine("参加リスト");
                                     foreach (ulong uid in players) {
                                         string name = client.GetGuild(Config.ID.ServerID).GetUser(uid).DisplayName;
-                                        if (name.Length > 20) sb.AppendLine(string.Concat(name.AsSpan(1, 20), "..."));
+                                        if (name.Length > 10) sb.AppendLine(string.Concat(name.AsSpan(0, 10), "..."));
                                         else sb.AppendLine(name);
                                     }
                                     await cmd.RespondAsync(sb.ToString());
@@ -130,7 +132,9 @@ namespace itobot {
                                 sb.Append("  ");
                                 sb.Append($"{b.Item2, 3}");
                                 sb.Append("  ");
-                                sb.AppendLine($"{client.GetGuild(Config.ID.ServerID).GetUser(b.Item3).DisplayName}");
+                                string name = client.GetGuild(Config.ID.ServerID).GetUser(b.Item3).DisplayName;
+                                if (name.Length > 10) sb.AppendLine(string.Concat(name.AsSpan(0, 10), "..."));
+                                else sb.AppendLine(name);
                             }
                             sb.AppendLine($"正解数{res.Count(c => c.Item1)}");
                             await cmd.RespondAsync(sb.ToString());
@@ -144,7 +148,7 @@ namespace itobot {
                             sb.AppendLine("現在の並び");
                             foreach (ulong uid in sub) {
                                 string name = client.GetGuild(Config.ID.ServerID).GetUser(uid).DisplayName;
-                                if (name.Length > 20) sb.AppendLine(string.Concat(name.AsSpan(1, 20), "..."));
+                                if (name.Length > 10) sb.AppendLine(string.Concat(name.AsSpan(0, 10), "..."));
                                 else sb.AppendLine(name);
                             }
                             await cmd.RespondAsync(sb.ToString());
@@ -163,13 +167,17 @@ namespace itobot {
                                 case "join":
                                     if (!players.Contains(arg3.Id)) {
                                         players.Add(arg3.Id);
-                                        await cmd.RespondAsync($"入室 : {arg3.DisplayName}");
+                                        string name = client.GetGuild(Config.ID.ServerID).GetUser(arg3.Id).DisplayName;
+                                        if (name.Length > 10) name = string.Concat(name.AsSpan(0, 10), "...");
+                                        await cmd.RespondAsync($"入室 : {name}");
                                     }
                                     break;
                                 case "leave":
                                     if (players.Contains(arg3.Id)) {
                                         players.Remove(arg3.Id);
-                                        await cmd.RespondAsync($"退室 : {arg3.DisplayName}");
+                                        string name = client.GetGuild(Config.ID.ServerID).GetUser(arg3.Id).DisplayName;
+                                        if (name.Length > 10) name = string.Concat(name.AsSpan(0, 10), "...");
+                                        await cmd.RespondAsync($"退室 : {name}");
                                     }
                                     break;
                                 case "list":
@@ -177,7 +185,7 @@ namespace itobot {
                                     sb.AppendLine("参加リスト");
                                     foreach (ulong uid in players) {
                                         string name = client.GetGuild(Config.ID.ServerID).GetUser(uid).DisplayName;
-                                        if (name.Length > 20) sb.AppendLine(string.Concat(name.AsSpan(1, 20), "..."));
+                                        if (name.Length > 10) sb.AppendLine(string.Concat(name.AsSpan(0, 10), "..."));
                                         else sb.AppendLine(name);
                                     }
                                     await cmd.RespondAsync(sb.ToString());
