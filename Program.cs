@@ -109,8 +109,10 @@ namespace itobot {
                                 case "list":
                                     sb.Clear();
                                     sb.AppendLine("参加リスト");
-                                    foreach (ulong uid in players)
-                                        sb.AppendLine(client.GetGuild(Config.ID.ServerID).GetUser(uid).DisplayName);
+                                    foreach (ulong uid in players) {
+                                        string name = client.GetGuild(Config.ID.ServerID).GetUser(uid).DisplayName;
+                                        sb.AppendLine(name.Substring(1, Math.Min(name.Length, 20)));
+                                    }
                                     await cmd.RespondAsync(sb.ToString());
                                     break;
                             }
@@ -138,8 +140,10 @@ namespace itobot {
                             List<ulong> sub = ito.Submit(cmd.User.Id);
                             sb.Clear();
                             sb.AppendLine("現在の並び");
-                            foreach (ulong b in sub)
-                                sb.AppendLine($"{client.GetGuild(Config.ID.ServerID).GetUser(b).DisplayName}");
+                            foreach (ulong uid in sub) {
+                                string name = client.GetGuild(Config.ID.ServerID).GetUser(uid).DisplayName;
+                                sb.AppendLine(name.Substring(1, Math.Min(name.Length, 20)));
+                            }
                             await cmd.RespondAsync(sb.ToString());
                             break;
                     }
@@ -168,8 +172,10 @@ namespace itobot {
                                 case "list":
                                     sb.Clear();
                                     sb.AppendLine("参加リスト");
-                                    foreach (ulong uid in players)
-                                        sb.AppendLine(client.GetGuild(Config.ID.ServerID).GetUser(uid).DisplayName);
+                                    foreach (ulong uid in players) {
+                                        string name = client.GetGuild(Config.ID.ServerID).GetUser(uid).DisplayName;
+                                        sb.AppendLine(name.Substring(1, Math.Min(name.Length, 20)));
+                                    }
                                     await cmd.RespondAsync(sb.ToString());
                                     break;
                             }
